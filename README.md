@@ -1,2 +1,10 @@
-# crs-udy-fh-nestjs-02
-Repositorio de introducción de conceptos básicos de TypeScript. Curso: Nest: Desarrollo backend escalable con Node de Fernando Herrera en la plataforma Udemy.
+# Introducción de TypeScript para NestJS
+
+Este proyecto es el respaldo de lo que hice en la sección 2 del curso.
+
+## Para ejecutar:
+
+```
+yarn install
+yarn dev
+```
