@@ -4,19 +4,15 @@ const Deprecated = (deprecationReason: string) => {
     memberName: string,
     propertyDescriptor: PropertyDescriptor
   ) => {
-    //   console.log({target})
-    return {
-      get() {
-        const wrapperFn = (...args: any[]) => {
-          console.warn(
-            `Method ${memberName} is deprecated with reason: ${deprecationReason}`
-          );
-          //! Llamar la función propiamente con sus argumentos
-          propertyDescriptor.value.apply(this, args);
-        };
-        return wrapperFn;
-      },
+    const originalMethod = propertyDescriptor.value;
+    propertyDescriptor.value = function (...args: any[]) {
+      console.warn(
+        `Method ${memberName} is deprecated with reason: ${deprecationReason}`
+      );
+      // Llama al método original con los argumentos y devuelve su resultado
+      return originalMethod.apply(this, args);
     };
+    return propertyDescriptor;
   };
 };
 
@@ -38,6 +34,6 @@ export class Pokemon {
   }
 }
 
-export const charmander = new Pokemon(4, "Charmander");
+const charmander = new Pokemon(4, "Charmander");
 
 charmander.speak();
